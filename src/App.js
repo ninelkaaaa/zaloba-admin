@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AdminComplaintList from './components/AdminComplaintList';
+import CategoryManager from './components/CategoryManager'; // если есть
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul className="nav-links">
+            <li><Link to="/">Жалобы</Link></li>
+            <li><Link to="/categories">Категории</Link></li>
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<AdminComplaintList />} />
+          <Route path="/categories" element={<CategoryManager />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

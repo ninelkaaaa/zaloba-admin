@@ -140,7 +140,7 @@ const AdminComplaintList = () => {
                   <td>
                     {c.photo_url ? (
                       <a
-                        href={`https://zaloba-backend.onrender.com/uploads/${c.photo_url}`}
+                        href={`https://zaloba-backend.onrender.com/${c.photo_url}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

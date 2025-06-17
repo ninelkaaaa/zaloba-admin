@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AdminComplaintList from './components/AdminComplaintList';
-import CategoryManager from './components/CategoryManager'; // если есть
+import CategoryManager from './components/CategoryManager'; 
 import './App.css';
 
 function App() {

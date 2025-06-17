@@ -87,7 +87,7 @@ const AdminComplaintList = () => {
 
   return (
     <div className="admin-container">
-      <h2>Панель управления жалобами</h2>
+      <h2>Панель управления жалобами и предложениями</h2>
 
       <div className="admin-controls">
         <label htmlFor="date-picker">Фильтр по дате:</label>
@@ -127,7 +127,7 @@ const AdminComplaintList = () => {
               const matchDate = selectedDate
                 ? new Date(c.created_at).toDateString() === selectedDate.toDateString()
                 : true;
-              const matchCategory = categorySearch
+                const matchCategory = categorySearch
                 ? c.category.toLowerCase().includes(categorySearch.toLowerCase())
                 : true;
               return matchDate && matchCategory;
@@ -139,7 +139,7 @@ const AdminComplaintList = () => {
                 <td>
                   {c.photo_url ? (
                     <a
-                      href={`https://zaloba-backend.onrender.com/api/uploads/${c.photo_url}`}
+                      href={`https://zaloba-backend.onrender.com/uploads/${c.photo_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

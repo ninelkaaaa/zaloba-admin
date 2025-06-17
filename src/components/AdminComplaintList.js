@@ -67,7 +67,9 @@ const AdminComplaintList = () => {
       .map((c) => ({
         Категория: c.category,
         Сообщение: c.message,
-        Фото: c.photo_url ? 'uploads/${c.photo_url}' : '',
+        Фото: c.photo_url
+          ? `https://zaloba-backend.onrender.com/uploads/${c.photo_url}`
+          : '',
         Статус: c.status_name,
         Дата: new Date(c.created_at).toLocaleString('ru-RU', {
           timeZone: 'Asia/Almaty',
@@ -125,53 +127,52 @@ const AdminComplaintList = () => {
           {complaints
             .filter((c) => {
               const matchDate = selectedDate
-                ? new Date(c.created_at).toDateString() === selectedDate.toDateString()
-                : true;
+                ? new Date(c.created_at).toDateString() === selectedDate.toDateString(): true;
                 const matchCategory = categorySearch
-                ? c.category.toLowerCase().includes(categorySearch.toLowerCase())
-                : true;
-              return matchDate && matchCategory;
-            })
-            .map((c) => (
-              <tr key={c.id}>
-                <td>{c.category}</td>
-                <td>{c.message}</td>
-                <td>
-                  {c.photo_url ? (
-                    <a
-                      href={`https://zaloba-backend.onrender.com/uploads/${c.photo_url}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  ? c.category.toLowerCase().includes(categorySearch.toLowerCase())
+                  : true;
+                return matchDate && matchCategory;
+              })
+              .map((c) => (
+                <tr key={c.id}>
+                  <td>{c.category}</td>
+                  <td>{c.message}</td>
+                  <td>
+                    {c.photo_url ? (
+                      <a
+                        href={`https://zaloba-backend.onrender.com/uploads/${c.photo_url}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Открыть
+                      </a>
+                    ) : (
+                      '—'
+                    )}
+                  </td>
+                  <td>
+                    <select
+                      value={c.status_id}
+                      onChange={(e) => handleStatusChange(c.id, Number(e.target.value))}
                     >
-                      Открыть
-                    </a>
-                  ) : (
-                    '—'
-                  )}
-                </td>
-                <td>
-                  <select
-                    value={c.status_id}
-                    onChange={(e) => handleStatusChange(c.id, Number(e.target.value))}
-                  >
-                    {statuses.map((s) => (
-                      <option key={s.id} value={s.id}>
-                        {s.name}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td>
-                  {new Date(c.created_at).toLocaleString('ru-RU', {
-                    timeZone: 'Asia/Almaty',
-                  })}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-export default AdminComplaintList;
+                      {statuses.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>
+                    {new Date(c.created_at).toLocaleString('ru-RU', {
+                      timeZone: 'Asia/Almaty',
+                    })}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+  
+  export default AdminComplaintList;
